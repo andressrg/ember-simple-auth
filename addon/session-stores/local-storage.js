@@ -73,6 +73,8 @@ export default BaseStore.extend({
   },
 
   _bindToStorageEvents() {
+    if (!Ember.$) { return; }  // if no jQuery is defined, return. Example: when running in FastBoot
+
     Ember.$(window).bind('storage', () => {
       let data = this.restore();
       if (!objectsAreEqual(data, this._lastData)) {
